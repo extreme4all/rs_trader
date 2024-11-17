@@ -69,10 +69,10 @@ class JsonDatabase(DatabaseInterface):
         filled_quantity = sum([o.quantity for o in order_part_ids])
         return order.quantity - filled_quantity
 
-    def update_order_status(self, order_id: UUID, status: OrderStatus) -> None:
+    def update_order_status(self, order_id: UUID, order_status: OrderStatus) -> None:
         for order in self.db["orders"]:
             if order["order_id"] == order_id:
-                order["order_status"] = status.value
+                order["order_status"] = order_status.value
                 break
 
     def add_order_part(self, order_part: OrderPart) -> None:

@@ -6,13 +6,13 @@ from pydantic import BaseModel, Field
 
 
 class OrderType(str, Enum):
-    BUY: str = "BUY"
-    SELL: str = "SELL"
+    BUY = "BUY"
+    SELL = "SELL"
 
 
 class OrderStatus(str, Enum):
-    OPEN: str = "OPEN"
-    CLOSED: str = "CLOSED"
+    OPEN = "OPEN"
+    CLOSED = "CLOSED"
 
 
 class Order(BaseModel):

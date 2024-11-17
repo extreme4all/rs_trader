@@ -18,7 +18,7 @@ def exchange(db) -> Exchange:
     return Exchange(database=db)
 
 
-def test_place_buy_order(exchange: Exchange, db: DatabaseInterface):
+def test_place_buy_order(exchange: Exchange, db: JsonDatabase):
     """Test placing a buy order."""
     buy_order = Order(
         user_id=1, item_id=1001, order_type=OrderType.BUY, quantity=10, price=150
@@ -31,7 +31,7 @@ def test_place_buy_order(exchange: Exchange, db: DatabaseInterface):
     assert db.db["orders"][0]["quantity"] == 10
 
 
-def test_place_sell_order_matching_partially(exchange: Exchange, db: DatabaseInterface):
+def test_place_sell_order_matching_partially(exchange: Exchange, db: JsonDatabase):
     """Test placing a sell order that matches a buy order partially."""
     sell_order = Order(
         user_id=2, item_id=1001, order_type=OrderType.SELL, quantity=5, price=140
@@ -43,7 +43,7 @@ def test_place_sell_order_matching_partially(exchange: Exchange, db: DatabaseInt
     assert len(buy_order_parts) == 1
 
 
-def test_place_sell_order_fulfill_remaining(exchange: Exchange, db: DatabaseInterface):
+def test_place_sell_order_fulfill_remaining(exchange: Exchange, db: JsonDatabase):
     """Test placing a second sell order that completes the first buy order."""
 
     sell_order = Order(
@@ -57,7 +57,7 @@ def test_place_sell_order_fulfill_remaining(exchange: Exchange, db: DatabaseInte
     assert sell_order_closed.order_status == OrderStatus.CLOSED
 
 
-def test_place_sell_order_no_match(exchange: Exchange, db: DatabaseInterface):
+def test_place_sell_order_no_match(exchange: Exchange, db: JsonDatabase):
     """Test placing a sell order with no matching buy order."""
     sell_order = Order(
         user_id=4, item_id=1002, order_type=OrderType.SELL, quantity=10, price=200
@@ -74,7 +74,7 @@ def test_place_sell_order_no_match(exchange: Exchange, db: DatabaseInterface):
     assert sell_order_created.quantity == remaining_quantity
 
 
-def test_remaining_quantity(exchange: Exchange, db: DatabaseInterface):
+def test_remaining_quantity(exchange: Exchange, db: JsonDatabase):
     """Test calculating the remaining quantity for an order."""
     buy_order = Order(
         user_id=1, item_id=1001, order_type=OrderType.BUY, quantity=10, price=150
