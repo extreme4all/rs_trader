@@ -1,7 +1,13 @@
 from datetime import datetime
 
-from src.interfaces.database import DatabaseInterface
-from src.structs.structs import Order, OrderLink, OrderPart, OrderStatus, OrderType
+from rs_trader.interfaces.database import DatabaseInterface
+from rs_trader.structs.structs import (
+    Order,
+    OrderLink,
+    OrderPart,
+    OrderStatus,
+    OrderType,
+)
 
 
 class Exchange:

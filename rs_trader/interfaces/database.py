@@ -2,7 +2,13 @@ from abc import ABC, abstractmethod
 from typing import Optional
 from uuid import UUID
 
-from src.structs.structs import Order, OrderLink, OrderPart, OrderStatus, OrderType
+from rs_trader.structs.structs import (
+    Order,
+    OrderLink,
+    OrderPart,
+    OrderStatus,
+    OrderType,
+)
 
 
 class DatabaseInterface(ABC):

@@ -1,6 +1,6 @@
 from .main import Exchange
-from .storage.json import JsonDatabase
-from .structs.structs import Order, OrderLink, OrderPart, OrderStatus, OrderType
+from .storage import JsonDatabase
+from .structs import Order, OrderLink, OrderPart, OrderStatus, OrderType
 
 __all__ = [
     # main

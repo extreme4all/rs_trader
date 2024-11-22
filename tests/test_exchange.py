@@ -1,9 +1,9 @@
 import pytest
 
-from src.interfaces.database import DatabaseInterface
-from src.main import Exchange
-from src.storage.json import JsonDatabase
-from src.structs.structs import Order, OrderStatus, OrderType
+from rs_trader import Exchange
+from rs_trader.interfaces import DatabaseInterface
+from rs_trader.storage import JsonDatabase
+from rs_trader.structs import Order, OrderStatus, OrderType
 
 
 @pytest.fixture
