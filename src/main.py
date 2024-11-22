@@ -37,7 +37,7 @@ class Exchange:
             min_price=sell_order.price,
         )
         # Sort by price in ascending order (lowest price first)
-        open_buy_orders.sort(key=lambda o: o.price) 
+        open_buy_orders.sort(key=lambda o: o.price)
 
         self._fulfill_order(sell_order, open_buy_orders)
 
