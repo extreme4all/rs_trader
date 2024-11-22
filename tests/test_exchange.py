@@ -93,7 +93,3 @@ def test_remaining_quantity(exchange: Exchange, db: JsonDatabase):
 
     remaining_quantity = db.get_order_remaining_quantity(buy_order.order_id)
     assert remaining_quantity == 0  # The buy order should be completely filled
-
-
-if __name__ == "__main__":
-    pytest.main()
