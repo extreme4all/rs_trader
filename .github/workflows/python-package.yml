@@ -48,11 +48,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - uses: ./.github/actions/setup
       - run: uv run pytest -v --durations=0 --cov --cov-report=xml
-      # TODO
-      # - name: Upload Coverage to Codecov
-      #   uses: codecov/codecov-action@v4
-      #   with:
-      #     token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   build_and_deploy:
     runs-on: [ubuntu-latest]
