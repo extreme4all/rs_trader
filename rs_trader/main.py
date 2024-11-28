@@ -32,7 +32,12 @@ class Exchange:
         )
         # Sort by price in descending order (highest price first)
         open_sell_orders.sort(key=lambda o: o.price, reverse=True)
+        print()
+        for s in open_sell_orders:
+            _s = s.model_dump(mode="json")
+            _s.pop("order_id")
 
+            print(_s)
         self._fulfill_order(buy_order, open_sell_orders)
 
     def match_sell_order(self, sell_order: Order) -> None:

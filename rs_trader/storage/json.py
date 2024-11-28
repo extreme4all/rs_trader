@@ -12,11 +12,13 @@ from rs_trader.structs.structs import (
 
 
 class JsonDatabase(DatabaseInterface):
-    db = {
-        "orders": [],
-        "order_parts": [],
-        "order_links": [],
-    }
+    def __init__(self):
+        super().__init__()
+        self.db = {
+            "orders": [],
+            "order_parts": [],
+            "order_links": [],
+        }
 
     def add_order(self, order: Order):
         self.db["orders"].append(order.model_dump())
