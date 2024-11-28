@@ -1,4 +1,6 @@
 from datetime import datetime
+from typing import Optional
+from uuid import UUID
 
 from rs_trader.interfaces.database import DatabaseInterface
 from rs_trader.structs.structs import (
@@ -32,12 +34,6 @@ class Exchange:
         )
         # Sort by price in descending order (highest price first)
         open_sell_orders.sort(key=lambda o: o.price, reverse=True)
-        print()
-        for s in open_sell_orders:
-            _s = s.model_dump(mode="json")
-            _s.pop("order_id")
-
-            print(_s)
         self._fulfill_order(buy_order, open_sell_orders)
 
     def match_sell_order(self, sell_order: Order) -> None:
@@ -97,3 +93,32 @@ class Exchange:
             self.database.update_order_status(order.order_id, OrderStatus.CLOSED)
         else:
             order.quantity = remaining_quantity
+
+    def get_order(
+        self,
+        order_id: Optional[UUID] = None,
+        item_id: Optional[int] = None,
+        user_id: Optional[int] = None,
+        order_type: Optional[OrderType] = None,
+        status: Optional[OrderStatus] = None,
+        max_price: Optional[int] = None,
+        min_price: Optional[int] = None,
+    ) -> list[Order]:
+        return self.database.get_orders(
+            order_id=order_id,
+            item_id=item_id,
+            user_id=user_id,
+            order_type=order_type,
+            status=status,
+            max_price=max_price,
+            min_price=min_price,
+        )
+
+    def get_order_parts(
+        self,
+        order_id: Optional[UUID] = None,
+        order_part_id: Optional[UUID] = None,
+    ) -> list[OrderPart]:
+        return self.database.get_order_parts(
+            order_id=order_id, order_part_id=order_part_id
+        )
