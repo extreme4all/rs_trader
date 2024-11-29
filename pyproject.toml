@@ -1,6 +1,6 @@
 [project]
 name = "rs-trader"
-version = "0.1.1"
+version = "0.2.0"
 authors = [{ name = "extreme4all" }]
 description = "Add your description here"
 readme = "README.md"
