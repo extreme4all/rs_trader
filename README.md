@@ -27,4 +27,7 @@ _ = [print(o, database.get_order_remaining_quantity(o.order_id)) for o in orders
 
 order_parts = exchange.get_order_parts(order_id=buy_order.order_id)
 _ = [print(o)for o in order_parts]
+
+median_price = exchange.get_median_price(item_id=123)
+print(median_price)
 ```

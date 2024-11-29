@@ -119,3 +119,4 @@ def test_buy_order():
     assert database.get_order_remaining_quantity(buy_p5.order_id) == 0
     assert database.get_order_remaining_quantity(sell_p3.order_id) == 0
     assert database.get_order_remaining_quantity(sell_p1.order_id) == 950
+    assert exchange.get_median_price(item_id=123) == 3.0

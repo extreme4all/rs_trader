@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 from typing import Optional
 from uuid import UUID
 
@@ -94,7 +94,7 @@ class Exchange:
         else:
             order.quantity = remaining_quantity
 
-    def get_order(
+    def get_orders(
         self,
         order_id: Optional[UUID] = None,
         item_id: Optional[int] = None,
@@ -122,3 +122,24 @@ class Exchange:
         return self.database.get_order_parts(
             order_id=order_id, order_part_id=order_part_id
         )
+
+    def get_median_price(self, item_id: int, day: date = datetime.now().date()):
+        prices = []
+        orders = self.get_orders(item_id=item_id)
+        for order in orders:
+            order_parts = self.get_order_parts(order_id=order.order_id)
+            for order_part in order_parts:
+                if order_part.executed_at.date() == day:
+                    prices.extend([order_part.price] * order_part.quantity)
+
+        # Return None if no prices found for today
+        if not prices:
+            return None
+
+        prices.sort()
+        mid = len(prices) // 2
+        if len(prices) % 2 == 0:
+            median = (prices[mid - 1] + prices[mid]) / 2
+        else:
+            median = prices[mid]
+        return median
